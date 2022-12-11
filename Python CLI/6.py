@@ -1,7 +1,5 @@
 from pulp import *
 import sys
-import matplotlib.pyplot as plt
-import numpy as np
 
 prob = LpProblem("Question_6", LpMinimize)
 
