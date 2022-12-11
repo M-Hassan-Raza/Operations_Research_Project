@@ -1,6 +1,5 @@
-from pulp import*
-import matplotlib.pyplot as plt
-import numpy as np
+from pulp import *
+import sys
 
 prob = LpProblem("Simple_Lp_Problem", LpMaximize)
 
