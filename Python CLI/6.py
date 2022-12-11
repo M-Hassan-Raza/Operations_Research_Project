@@ -1,4 +1,5 @@
-from pulp import*
+from pulp import *
+import sys
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -17,7 +18,23 @@ prob += 57*x1 + 6*x2 + 1*x3  + 8*x4 >= 85
 prob += 1*x2 + 22*x3 + 12*x4 >= 25
 
 
-prob.solve()
+result = prob.solve()
+
+if result == 1:
+    print('Problem Status: ', LpStatus[prob.status])
+elif result == 0:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
+elif result == -1:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
+elif result == -2:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
+elif result == -3:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
+
 
 for v in prob.variables():
     print(v.name, "=" , v.varValue)

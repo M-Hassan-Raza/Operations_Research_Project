@@ -26,7 +26,22 @@ prob += 1*x3 + 1*x4 <= 800
 prob += 1*x2 + 1*x3 <= 1250
 prob += 1*x1 + 1*x4 <= 750
 
-prob.solve()
+result = prob.solve()
+
+if result == 1:
+    print('Problem Status: ', LpStatus[prob.status])
+elif result == 0:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
+elif result == -1:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
+elif result == -2:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
+elif result == -3:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
 
 for v in prob.variables():
     print(v.name, "=" , v.varValue)

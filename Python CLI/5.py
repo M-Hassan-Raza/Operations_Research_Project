@@ -15,7 +15,22 @@ prob += 55*x1 + 75*x2 + 95*x3 <= 48000
 prob += 3*x1 + 5*x2 + 6*x3 <= 3000
 prob += 5*x1 + 6*x2 + 8*x3 <= 12000
 
-prob.solve()
+result = prob.solve()
+
+if result == 1:
+    print('Problem Status: ', LpStatus[prob.status])
+elif result == 0:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
+elif result == -1:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
+elif result == -2:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
+elif result == -3:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
 
 for v in prob.variables():
     print(v.name, "=" , v.varValue)

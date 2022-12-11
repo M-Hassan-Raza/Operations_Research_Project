@@ -18,7 +18,22 @@ prob += 4.5*x2 +4.0*x3 + 3.0*x4 <= 2400
 prob += 9.0*x5 <= 1200
 prob += 4.0*x1 + 3.0*x2 + 2.5*x3 + 2.0*x4 + 4.0*x5 <= 3000
 
-prob.solve()
+result = prob.solve()
+
+if result == 1:
+    print('Problem Status: ', LpStatus[prob.status])
+elif result == 0:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
+elif result == -1:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
+elif result == -2:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
+elif result == -3:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
 
 for v in prob.variables():
     print(v.name, "=" , v.varValue)

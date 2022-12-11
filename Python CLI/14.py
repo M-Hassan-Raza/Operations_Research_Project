@@ -43,7 +43,22 @@ prob += 3*XJO + 5*YJO <= 1050
 prob += 3*XAO + 5*YAO <= 750
 prob += 3*XSO + 5*YSO <= 600
 
-prob.solve()
+result = prob.solve()
+
+if result == 1:
+    print('Problem Status: ', LpStatus[prob.status])
+elif result == 0:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
+elif result == -1:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
+elif result == -2:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
+elif result == -3:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
 
 for v in prob.variables():
     print(v.name, "=", v.varValue)
