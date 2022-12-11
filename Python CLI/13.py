@@ -22,7 +22,23 @@ prob += 1*x6 - 0.8*x7 >= 0
 prob += 1*x1 -0.6*x6 >= 0
 prob += 4*x1 + 6*x2 + 9*x3 + 3*x4 <= 340000000
 
-prob.solve()
+result = prob.solve()
+
+if result == 1:
+    print('Problem Status: ', LpStatus[prob.status])
+elif result == 0:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
+elif result == -1:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
+elif result == -2:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
+elif result == -3:
+    print('Problem Status: ', LpStatus[prob.status])
+    sys.exit()
+
 for v in prob.variables():
     print(v.name, "=" , v.varValue)
 
