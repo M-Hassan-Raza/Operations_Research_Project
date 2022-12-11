@@ -17,18 +17,15 @@ canvas_open = True
 entry_form_open = False
 final_window_open = False
 
-numberOfConstraints = StringVar()
-nameOfProblem = StringVar()
-intConstraints = 0
-typeOfProblem = StringVar()
+numberOfConstraints = 0
+nameOfProblem = 'Giapetto'
 listOfConstraints = []
 listOfDecisionVariables = []
 listOfFormattedDecisionVariables = []
 lowerBound = 0
-nameOfProblem = StringVar()
-objectiveFunction = StringVar()
-problem = StringVar()
+objectiveFunction = '20*x1 + 30*x2'
 listOfReferences = []
+constraintNumber = 0
 
 # menubar = Menu(canvas)
 # canvas.config(menu=menubar)
@@ -58,6 +55,36 @@ typeProblemLabel = customtkinter.CTkLabel(master=canvas, text='Type of Problem')
 typeProblemLabel.place(x=180, y=190)
 
 
+def go_back():
+    canvas.iconify()
+
+
+def solve_problem():
+    finalWindow = customtkinter.CTkToplevel()
+    finalWindow.geometry('900x900')
+    finalWindow.title('Results')
+    finalWindow.iconbitmap('res/results.ico')
+    finalWindow.resizable(True, True)
+
+    if typeOfProblem == 'Maximize':
+        problem = LpProblem(str(nameOfProblem), LpMaximize)
+    else:
+        problem = LpProblem(str(nameOfProblem), LpMinimize)
+
+    for x in range(constraintNumber):
+        listOfConstraints[x] = listOfReferences[x].get()
+
+    for y in range(constraintNumber):
+        listOfFormattedDecisionVariables[y] = LpVariable(str(listOfDecisionVariables[y]), lowBound=lowerBound)
+
+    problem += objectiveFunction
+
+    for i in range(constraintNumber):
+        problem += listOfConstraints[i]
+
+    print(problem)
+
+
 def main_function():
     if not numberOfConstraints.get():
         messagebox.showinfo('Error', 'Text boxes can\'t be empty')
@@ -69,14 +96,12 @@ def main_function():
         try:
             int(numberOfConstraints.get())
             intConstraints = int(numberOfConstraints.get())
+            constraintNumber = intConstraints
         except ValueError:
             messagebox.showinfo('Error', 'Number of constraints must be an integer value')
             return
 
     canvas.withdraw()
-    # if(canvas_open == True):
-    #     top.iconify()
-
     top = customtkinter.CTkToplevel()
     top.geometry('900x900')
     top.title('Enter The Data')
@@ -95,7 +120,7 @@ def main_function():
         enumeratedEntry = customtkinter.CTkEntry(master=top, width=220)
         enumeratedEntry.grid(row=j + 1, column=1, padx=10, pady=10)
 
-        listOfDecisionVariables[j] = 'X' + str(j+1)
+        listOfDecisionVariables.append(str('x' + str(j + 1)))
         listOfReferences.append(enumeratedEntry)
 
     lowerBoundLabel = customtkinter.CTkLabel(master=top, text='All Xs >= ')
@@ -104,41 +129,14 @@ def main_function():
     lowerBoundEntry = customtkinter.CTkEntry(master=top, width=220)
     lowerBoundEntry.grid(row=intConstraints + 2, column=1, padx=10, pady=10)
 
-    def solve_problem():
-        top.withdraw()
-        finalWindow = customtkinter.CTkToplevel()
-        finalWindow.geometry('900x900')
-        finalWindow.title('Enter The Data')
-        finalWindow.iconbitmap('res/form.ico')
-        finalWindow.resizable(True, True)
-
-    def go_back():
-        top.withdraw()
-        canvas.iconify()
-        pass
-
-    def confirm_constraints():
-        for x in range(intConstraints):
-            listOfConstraints[x] = listOfReferences[x].get()
-
-        if(typeOfProblem == 'Maximize'):
-            problem = LpProblem(nameOfProblem, LpMaximize)
-        else:
-            problem = LpProblem(nameOfProblem, LpMinimize)
-
-        for y in range(intConstraints):
-            listOfFormattedDecisionVariables[y] = LpVariable(str(listOfDecisionVariables[y]), lowBound=lowerBound)
-
-        solve_problem()
-
-    customtkinter.CTkButton(master=top, text='Confirm Constraints', corner_radius=8,
-                            command=confirm_constraints, font=('SAN_SERIF', 15, 'bold')).place(x=320, y=520)
-
     prev_button = customtkinter.CTkButton(master=top, text='←', command=go_back, width=32, height=32, corner_radius=100)
     prev_button.place(x=10, y=10)
 
+    solve_button = customtkinter.CTkButton(master=top, text='Solve', corner_radius=8,command=solve_problem, font=('SAN_SERIF', 25, 'bold'))
+    solve_button.place(x=320, y=520)
 
-customtkinter.CTkButton(master=canvas, text='Confirm', corner_radius=8,
-                        command=main_function, font=('SAN_SERIF', 15, 'bold')).place(x=320, y=420)
+
+
+customtkinter.CTkButton(master=canvas, text='Confirm', corner_radius=8, command=main_function, font=('SAN_SERIF', 30, 'bold')).place(x=320, y=420)
 
 canvas.mainloop()
