@@ -1,5 +1,4 @@
 from tkinter import *
-import tkinter
 from tkinter import messagebox
 import customtkinter
 
@@ -48,6 +47,9 @@ typeProblemLabel = customtkinter.CTkLabel(master=canvas, text='Type of Problem')
 typeProblemLabel.place(x=180, y=140)
 
 
+def confirm_constraints():
+    pass
+
 def main_function():
     if not numberOfConstraints.get():
         messagebox.showinfo('Error', 'Text boxes can\'t be empty')
@@ -63,16 +65,17 @@ def main_function():
             messagebox.showinfo('Error', 'Number of constraints must be an integer value')
             return
 
+    canvas.withdraw()
     top = customtkinter.CTkToplevel()
     top.geometry('800x600')
     top.title('Enter The Data')
     top.iconbitmap('res/form.ico')
     top.resizable(False, False)
 
-    l = customtkinter.CTkLabel(master=top, text='Objective Function')
-    l.grid(row=0, column=0, padx=50, pady=10)
-    e = customtkinter.CTkEntry(master=top, width=220)
-    e.grid(row=0, column=1, padx=10, pady=10)
+    labelLooped = customtkinter.CTkLabel(master=top, text='Objective Function')
+    labelLooped.grid(row=0, column=0, padx=50, pady=10)
+    entryLooped = customtkinter.CTkEntry(master=top, width=220)
+    entryLooped.grid(row=0, column=1, padx=10, pady=10)
 
     for j in range(intConstraints):
         enumeratedLabel = customtkinter.CTkLabel(master=top, text='Constraint: ' + str(j + 1))
@@ -82,7 +85,7 @@ def main_function():
         enumeratedEntry.grid(row=j + 1, column=1, padx=10, pady=10)
 
     customtkinter.CTkButton(master=top, text='Confirm', corner_radius=8,
-                            command=main_function, font=('SAN_SERIF', 15, 'bold')).place(x=300, y=300)
+                            command=confirm_constraints, font=('SAN_SERIF', 15, 'bold')).place(x=300, y=300)
 
 
 customtkinter.CTkButton(master=canvas, text='Confirm', corner_radius=8,
