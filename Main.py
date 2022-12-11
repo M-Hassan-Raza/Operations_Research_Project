@@ -17,8 +17,8 @@ canvas_open = True
 entry_form_open = False
 final_window_open = False
 
-numberOfConstraints = 0
-nameOfProblem = 'Giapetto'
+numberOfConstraints = StringVar()
+nameOfProblem = StringVar()
 listOfConstraints = []
 listOfDecisionVariables = []
 listOfFormattedDecisionVariables = []
