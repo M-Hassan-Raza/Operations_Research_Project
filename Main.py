@@ -23,6 +23,7 @@ intConstraints = 0
 typeOfProblem = StringVar()
 listOfConstraints = []
 listOfDecisionVariables = []
+listOfFormattedDecisionVariables = []
 lowerBound = 0
 nameOfProblem = StringVar()
 objectiveFunction = StringVar()
@@ -94,7 +95,7 @@ def main_function():
         enumeratedEntry = customtkinter.CTkEntry(master=top, width=220)
         enumeratedEntry.grid(row=j + 1, column=1, padx=10, pady=10)
 
-        # listOfDecisionVariables[j] = 'X' + str(j+1)
+        listOfDecisionVariables[j] = 'X' + str(j+1)
         listOfReferences.append(enumeratedEntry)
 
     lowerBoundLabel = customtkinter.CTkLabel(master=top, text='All Xs >= ')
@@ -104,14 +105,6 @@ def main_function():
     lowerBoundEntry.grid(row=intConstraints + 2, column=1, padx=10, pady=10)
 
     def solve_problem():
-        pass
-
-    def go_back():
-        top.withdraw()
-        canvas.iconify()
-        pass
-
-    def confirm_constraints():
         top.withdraw()
         finalWindow = customtkinter.CTkToplevel()
         finalWindow.geometry('900x900')
@@ -119,8 +112,24 @@ def main_function():
         finalWindow.iconbitmap('res/form.ico')
         finalWindow.resizable(True, True)
 
+    def go_back():
+        top.withdraw()
+        canvas.iconify()
+        pass
+
+    def confirm_constraints():
         for x in range(intConstraints):
-            print(listOfReferences[x].get())
+            listOfConstraints[x] = listOfReferences[x].get()
+
+        if(typeOfProblem == 'Maximize'):
+            problem = LpProblem(nameOfProblem, LpMaximize)
+        else:
+            problem = LpProblem(nameOfProblem, LpMinimize)
+
+        for y in range(intConstraints):
+            listOfFormattedDecisionVariables[y] = LpVariable(str(listOfDecisionVariables[y]), lowBound=lowerBound)
+
+        solve_problem()
 
     customtkinter.CTkButton(master=top, text='Confirm Constraints', corner_radius=8,
                             command=confirm_constraints, font=('SAN_SERIF', 15, 'bold')).place(x=320, y=520)
