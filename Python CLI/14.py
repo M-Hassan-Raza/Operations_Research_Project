@@ -64,6 +64,9 @@ for v in prob.variables():
     print(v.name, "=", v.varValue)
 
 print("Optimal Value: ", value(prob.objective))
+print ("\nSensitivity Analysis\nConstraint\t\t\t\tShadow Price\t\t\t\tSlack")
+for name, c in prob.constraints.items():
+    print (name, "\t\t\t\t\t", round(c.pi, 3), "\t\t\t\t\t\t", round(c.slack, 5))
 
 
 
