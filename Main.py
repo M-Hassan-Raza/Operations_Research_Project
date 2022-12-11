@@ -1,11 +1,8 @@
 from tkinter import *
-import tkinter
 from tkinter import messagebox
 from pulp import *
 
-import PIL
 import customtkinter
-from PIL import Image, ImageTk
 
 #
 canvas = customtkinter.CTk()
@@ -20,11 +17,9 @@ canvas_open = True
 entry_form_open = False
 final_window_open = False
 
-
 numberOfConstraints = StringVar()
 nameOfProblem = StringVar()
 intConstraints = 0
-top = ''
 typeOfProblem = StringVar()
 listOfConstraints = []
 listOfDecisionVariables = []
@@ -32,6 +27,7 @@ lowerBound = 0
 nameOfProblem = StringVar()
 objectiveFunction = StringVar()
 problem = StringVar()
+listOfReferences = []
 
 # menubar = Menu(canvas)
 # canvas.config(menu=menubar)
@@ -43,12 +39,10 @@ constLabel.place(x=180, y=30)
 entry = customtkinter.CTkEntry(master=canvas, textvariable=nameOfProblem)
 entry.pack(padx=20, pady=30)
 
-
 constLabel = customtkinter.CTkLabel(master=canvas, text='Number Of Constraints')
 constLabel.place(x=180, y=120)
 entry = customtkinter.CTkEntry(master=canvas, textvariable=numberOfConstraints)
 entry.pack(padx=20, pady=30)
-
 
 typeOfProblem = customtkinter.StringVar(value="Maximization")
 
@@ -79,6 +73,9 @@ def main_function():
             return
 
     canvas.withdraw()
+    # if(canvas_open == True):
+    #     top.iconify()
+
     top = customtkinter.CTkToplevel()
     top.geometry('900x900')
     top.title('Enter The Data')
@@ -97,14 +94,15 @@ def main_function():
         enumeratedEntry = customtkinter.CTkEntry(master=top, width=220)
         enumeratedEntry.grid(row=j + 1, column=1, padx=10, pady=10)
 
-        listOfDecisionVariables[j] = 'X' + str(j+1)
-
+        # listOfDecisionVariables[j] = 'X' + str(j+1)
+        listOfReferences.append(enumeratedEntry)
 
     lowerBoundLabel = customtkinter.CTkLabel(master=top, text='All Xs >= ')
     lowerBoundLabel.grid(row=intConstraints + 2, column=0, padx=10)
 
     lowerBoundEntry = customtkinter.CTkEntry(master=top, width=220)
     lowerBoundEntry.grid(row=intConstraints + 2, column=1, padx=10, pady=10)
+
     def solve_problem():
         pass
 
@@ -121,6 +119,8 @@ def main_function():
         finalWindow.iconbitmap('res/form.ico')
         finalWindow.resizable(True, True)
 
+        for x in range(intConstraints):
+            print(listOfReferences[x].get())
 
     customtkinter.CTkButton(master=top, text='Confirm Constraints', corner_radius=8,
                             command=confirm_constraints, font=('SAN_SERIF', 15, 'bold')).place(x=320, y=520)
