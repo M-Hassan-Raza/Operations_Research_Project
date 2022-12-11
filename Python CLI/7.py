@@ -43,7 +43,7 @@ elif result == -3:
     sys.exit()
 
 for v in prob.variables():
-    print(v.name, "=" , v.varValue)
+    print(v.name, "=" , round(v.varValue, 3), "\tReduced Cost =", round(v.dj, 3))
 
 print("Optimal Value: ", value(prob.objective))
 print ("\nSensitivity Analysis\nConstraint\t\t\t\tShadow Price\t\t\t\tSlack")
