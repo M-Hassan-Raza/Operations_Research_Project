@@ -10,10 +10,10 @@ x3 = LpVariable("x3",120)
 
 prob += 6.50*x1 + 9.00*x2 + 10.00*x3
 
-prob += 3*x1 + 4*x2 + 6*x3 <= 2700, "1st constraint"
-prob += 55*x1 + 75*x2 + 95*x3 <= 48000, "2nd constraint"
-prob += 3*x1 + 5*x2 + 6*x3 <= 3000, "3rd constraint"
-prob += 5*x1 + 6*x2 + 8*x3 <= 12000, "4th constraint"
+prob += 3*x1 + 4*x2 + 6*x3 <= 2700
+prob += 55*x1 + 75*x2 + 95*x3 <= 48000
+prob += 3*x1 + 5*x2 + 6*x3 <= 3000
+prob += 5*x1 + 6*x2 + 8*x3 <= 12000
 
 prob.solve()
 
