@@ -11,10 +11,10 @@ x4 = LpVariable("x4",0)
 
 prob += 51*x1 + 9*x2 + 1*x3 + 8*x4
 
-prob += 692*x1 + 110*x2 + 81*x3 + 150*x4 >= 1410, "1st constraint"
-prob += 692*x1 + 110*x2 + 81*x3 + 150*x4 <= 1610, "2nd constraint"
-prob += 57*x1 + 6*x2 + 1*x3  + 8*x4 >= 85, "3rd constraint"
-prob += 1*x2 + 22*x3 + 12*x4 >= 25, "4th constraint"
+prob += 692*x1 + 110*x2 + 81*x3 + 150*x4 >= 1410
+prob += 692*x1 + 110*x2 + 81*x3 + 150*x4 <= 1610
+prob += 57*x1 + 6*x2 + 1*x3  + 8*x4 >= 85
+prob += 1*x2 + 22*x3 + 12*x4 >= 25
 
 
 prob.solve()

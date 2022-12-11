@@ -31,17 +31,17 @@ prob += SA + XSR + XSO - SS == 150
 prob += YJR + YJO - TJ == 80
 prob += TJ + YAR + YAO - TA == 300
 prob += TA + YSR + YSO - TS == 400
-prob += SS >= 10, "Motor Home"
-prob += TS >= 25, "Mobile Home"
-prob += SJ + TJ <= 300, "Maximum Storage in July"
-prob += SA + TA <= 300, "Maximum Storage in August"
-prob += SS + TS <= 300, "Maximum Storage in September"
-prob += 3*XJR + 5*YJR <= 2100, "Regular july"
-prob += 3*XAR + 5*YAR <= 1500, "Regular august"
-prob += 3*XSR + 5*YSR <= 1200, "Regular september"
-prob += 3*XJO + 5*YJO <= 1050, "Overtime july "
-prob += 3*XAO + 5*YAO <= 750, "Overtime august"
-prob += 3*XSO + 5*YSO <= 600, "Overtime september"
+prob += SS >= 10
+prob += TS >= 25
+prob += SJ + TJ <= 300
+prob += SA + TA <= 300
+prob += SS + TS <= 300
+prob += 3*XJR + 5*YJR <= 2100
+prob += 3*XAR + 5*YAR <= 1500
+prob += 3*XSR + 5*YSR <= 1200
+prob += 3*XJO + 5*YJO <= 1050
+prob += 3*XAO + 5*YAO <= 750
+prob += 3*XSO + 5*YSO <= 600
 
 prob.solve()
 
